@@ -5,7 +5,7 @@ import com.example.demo.models.UserModel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class validators {
+public class Validators {
 
     static Matcher matcher;
     static boolean matchFound;

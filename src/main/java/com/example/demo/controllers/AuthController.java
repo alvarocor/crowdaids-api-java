@@ -4,7 +4,7 @@ import com.example.demo.models.TokenModel;
 import com.example.demo.repositories.UserImplementations;
 import com.example.demo.utils.JWT;
 
-import com.example.demo.utils.validators;
+import com.example.demo.utils.Validators;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,8 +25,8 @@ public class AuthController {
 
     @RequestMapping(value = "api/users/auth", method = RequestMethod.POST)
     public TokenModel auth(@RequestBody UserModel user) {
-        validators.validateUsername(user.getUsername());
-        validators.validatePassword(user.getPassword());
+        Validators.validateUsername(user.getUsername());
+        Validators.validatePassword(user.getPassword());
 
         UserModel userLogged = userImplementations.authenticateUser(user);
         if (userLogged != null) {
