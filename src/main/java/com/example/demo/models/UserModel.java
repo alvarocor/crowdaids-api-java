@@ -1,28 +1,35 @@
 package com.example.demo.models;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "user")
 public class UserModel {
 
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    @Type(type = "uuid-char")
+    private UUID id;
 
     private String fullname;
     private String username;
     private String email;
     private String password;
+    private String oldPassword;
 
-    public Long getId() {
-        return id;
-    }
+    public UUID getId() { return id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(UUID id)  { this.id = id; }
 
     public String getFullname() {
         return fullname;
@@ -55,5 +62,9 @@ public class UserModel {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getOldPassword() { return oldPassword;}
+
+    public void setOldPassword(String oldPassword) { this.oldPassword = oldPassword;}
     
 }
