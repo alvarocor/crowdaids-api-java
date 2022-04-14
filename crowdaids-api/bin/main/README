@@ -1,0 +1,18 @@
+Flujo de los servicios de Back End
+
+. Comienza el flujo cuando el usuario a traves de la aplicacion front end, en primera instancia registra un nuevo usuario:
+
+    - Al usuario enviar todos sus datos para registrarse, mediante la función registerUser en el archivo UserController.java, se reciben los datos, se encripta la contraseña, y luego se utiliza el metodo de UserImplementations.register, donde se hace definitivo el registro de usuario.
+
+    - Cuando el usuario luego de haberse registrado, inicia sesión a treves de la aplicacion front end, mediante la funcion auth del archivo AuthController.java, se reciben los campos username y password, se llama al metodo UserImplementations.AuthenticateUser, donde se verifica en base de datos que dicho usuario existe y hay coincidencia, se verifica la password encriptada y si es correcto, este metodo devuelve todos los datos del usuario.
+
+
+
+Detalles de los paquetes:
+
+    - Paquete Models: tiene el archivo UserModel, donde se crea la tabla de usuario en base de datos, se encuentras los setters y getters de sus propiedades.
+
+    - Paquete Controlles: se encuentran los dos controladores (AuthController, UserController), dónde en primera instancia, mediante las diferentes rutas de la API, el back end recibe la informacion de usuario como registro y login.
+
+    - Paquete Repositories: se encuentran dos archivos, UserImplementations, que extiende de la clase UserRepository y sus propiedades, que son las acciones que se realizan en base de datos, como verificar la existencia de un usuario o registrar uno nuevo, y el archivo UserRepository, con 4 metodos (Listar usuarios, borrar usuarios, login usuario, register usuario).
+
