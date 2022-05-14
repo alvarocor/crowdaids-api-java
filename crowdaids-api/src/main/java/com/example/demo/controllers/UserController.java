@@ -3,8 +3,8 @@ package com.example.demo.controllers;
 import com.example.demo.repositories.UserImplementations;
 import com.example.demo.models.UserModel;
 import com.example.demo.utils.JWT;
-import com.example.demo.utils.SanitizeToken;
 import com.example.demo.utils.Validators;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +13,10 @@ import de.mkammerer.argon2.Argon2Factory;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
-
 public class UserController {
 	
 	 @Autowired
-	   private JWT jwt;
+	 private JWT jwt;
 
     @Autowired
     private UserImplementations userImplementations;
@@ -75,10 +74,11 @@ public class UserController {
         userImplementations.modifyUser(user1, newData);
     }
 
-    @RequestMapping(value = "/api/users", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/users/delete", method = RequestMethod.DELETE)
     public void delete(@RequestHeader(value="Authorization") String token,
                        @RequestBody UserModel password) {
         Validators.validateToken(token);
+        Validators.validatePassword(password.getPassword());
 
         String bearerToken = token;
         String[] parts = bearerToken.split(" ");
@@ -86,6 +86,6 @@ public class UserController {
 
         String userId = validateToken(finalToken);
 
-        userImplementations.delete(userId, password);
+        userImplementations.delete(userId, password.getPassword());
     }
 }

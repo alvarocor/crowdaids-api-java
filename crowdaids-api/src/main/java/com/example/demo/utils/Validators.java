@@ -73,12 +73,12 @@ public class Validators {
 
         if (!email.getClass().getSimpleName().equals("String")) throw new Error("email is not a string");
         if (email.trim().length() == 0) throw new Error("email is empty or blank");
-        if (matchFound) throw new Error("is not an e-mail");
+        if (!matchFound) throw new Error("is not an e-mail");
     }
 
     public static void validationData(UserModel data) {
 
-        if (!data.getFullname().equals(null)) {
+        if (data.getFullname() != null) {
             validateFullname(data.getFullname());
         }
 
@@ -90,8 +90,8 @@ public class Validators {
             validateUsername(data.getUsername());
         }
 
-        if (data.getOldPassword() != null && data.getPassword() != null) throw new Error("old password is not defined");
-        if (data.getPassword() != null && data.getOldPassword() != null) throw new Error("password is not defined");
+        if (data.getOldPassword() != null && data.getPassword() == null) throw new Error("old password is not defined");
+        if (data.getPassword() == null && data.getOldPassword() != null) throw new Error("password is not defined");
 
         if (data.getPassword() != null) {
             validatePassword(data.getPassword());

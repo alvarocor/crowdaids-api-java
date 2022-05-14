@@ -1,20 +1,15 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.UserModel;
-import com.example.demo.utils.JWT;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 @Repository
@@ -41,7 +36,7 @@ public class UserImplementations implements UserRepository {
     }
 
     @Override
-    public void delete(String id, UserModel password) {
+    public void delete(String id, String password) {
         String query = "from UserModel where id = '" + id + "'";
         List <UserModel> user = entityManager.createQuery(query)
                 //.setParameter("id", idUser)
@@ -51,7 +46,8 @@ public class UserImplementations implements UserRepository {
             throw new Error("User with " + id + " not found.");
         }
 
-        if (user.get(0).getPassword().equals(password)) {
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+        if (argon2.verify(user.get(0).getPassword(), password)) {
             entityManager.remove(user.get(0));
         } else {
             throw new Error("Wrong password");

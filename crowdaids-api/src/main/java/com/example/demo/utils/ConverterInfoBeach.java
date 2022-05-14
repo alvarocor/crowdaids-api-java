@@ -19,20 +19,37 @@ public class ConverterInfoBeach {
 		String swellMax = "";
 		String swellMin = "";
 		String timeToCheck = Long.toString(time);
+		int indexSwellMax = info.get(0).toString().indexOf("max=");
+		int indexSwellMin = info.get(0).toString().indexOf("min=");
 		
 		for (int i = 0; i < info.size(); i++) {
 			if (info.get(i).toString().substring(11, 21) == timeToCheck) {
-				swellMax = info.get(i).toString().substring(47, 50);
-				swellMin = info.get(i).toString().substring(56, 59);
+				swellMax = info.get(i).toString().substring(indexSwellMax + 4, indexSwellMax + 7);
+				swellMin = info.get(i).toString().substring(indexSwellMin + 4, indexSwellMin +7);
+				
+				if(swellMax.contains(",")) {
+					swellMax = swellMax.substring(0, swellMax.indexOf(","));
+				} 
+				
+				if(swellMin.contains(",")) {
+					swellMin = swellMin.substring(0, swellMin.indexOf(","));
+				} 
 				
 				response.add(swellMax);
 				response.add(swellMin);
 				return response;
 			}	
 		}
-		swellMax = info.get(0).toString().substring(47, 50);
-		swellMin = info.get(0).toString().substring(56, 59);
+		swellMax = info.get(0).toString().substring(indexSwellMax + 4, indexSwellMax + 7);
+		swellMin = info.get(0).toString().substring(indexSwellMin + 4, indexSwellMin +7);
 		
+		if(swellMax.contains(",")) {
+			swellMax = swellMax.substring(0, swellMax.indexOf(","));
+		} 	
+		if(swellMin.contains(",")) {
+			swellMin = swellMin.substring(0, swellMin.indexOf(","));
+		} 
+			
 		response.add(swellMax);
 		response.add(swellMin);
 		return response;

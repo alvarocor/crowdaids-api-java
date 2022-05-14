@@ -13,7 +13,7 @@ public interface UserRepository {
     @Transactional
     UserModel getUser(String id);
 
-    void delete(String id, UserModel password);
+    void delete(String id, String password);
 
     void register(UserModel user);
 

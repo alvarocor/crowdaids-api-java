@@ -3,14 +3,17 @@ package com.example.demo.models;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+import com.example.demo.repositories.FavoritesImplementations;
+
 import javax.persistence.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "user")
 public class UserModel {
 
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -26,8 +29,20 @@ public class UserModel {
     private String email;
     private String password;
     private String oldPassword;
+    
+    @OneToMany(targetEntity = FavoritesBeachesModel.class, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private List <FavoritesBeachesModel> favorites;
 
-    public UUID getId() { return id; }
+	public List<FavoritesBeachesModel> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(List<FavoritesBeachesModel> favorites) {
+		this.favorites = favorites;
+	}
+
+	public UUID getId() { return id; }
 
     public void setId(UUID id)  { this.id = id; }
 

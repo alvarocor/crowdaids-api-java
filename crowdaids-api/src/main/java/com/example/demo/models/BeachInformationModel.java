@@ -1,9 +1,9 @@
 package com.example.demo.models;
 
-import java.util.List;
-
 public class BeachInformationModel {
 	
+	private String breadCrumbs;
+
 	private Object infoWave;
 	
 	private Object infoWeather;
@@ -39,6 +39,15 @@ public class BeachInformationModel {
 	private String directionTypeWind;
 	
 	private double directionWind;
+	
+	
+	public String getBreadCrumbs() {
+		return breadCrumbs;
+	}
+
+	public void setBreadCrumbs(String breadCrumbs) {
+		this.breadCrumbs = breadCrumbs;
+	}
 
 	public Object getInfoWave() {
 		return infoWave;

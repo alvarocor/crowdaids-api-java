@@ -34,7 +34,7 @@ public class BeachImplementations implements BeachRepository {
         	utcOffset = Integer.parseInt(utc);
         	utcOffset = -utcOffset;
         } else {
-        	utcOffset = Integer.parseInt(utc);
+        	utcOffset = Integer.parseInt(utc.substring(0, 1));
         }
         
         long utcFinal = ConverterInfoBeach.getUtcBeach(utcOffset);
@@ -98,7 +98,7 @@ public class BeachImplementations implements BeachRepository {
         	utcOffset = Integer.parseInt(utc);
         	utcOffset = -utcOffset;
         } else {
-        	utcOffset = Integer.parseInt(utc);
+        	utcOffset = Integer.parseInt(utc.substring(0, 1));
         }
         
         long utcFinal = ConverterInfoBeach.getUtcBeach(utcOffset);
@@ -139,7 +139,7 @@ public class BeachImplementations implements BeachRepository {
         	utcOffset = Integer.parseInt(utc);
         	utcOffset = -utcOffset;
         } else {
-        	utcOffset = Integer.parseInt(utc);
+        	utcOffset = Integer.parseInt(utc.substring(0, 1));
         }
         
         long utcFinal = ConverterInfoBeach.getUtcBeach(utcOffset);
@@ -152,7 +152,7 @@ public class BeachImplementations implements BeachRepository {
         
         //SET OBJECT TIDE INFO
         Object objectTide = ((LinkedHashMap) info).get("tides");
-        tideConditions.setInfoWeather(objectTide);
+        tideConditions.setInfoTide(objectTide);
         
 		return tideConditions;
     }
@@ -179,7 +179,7 @@ public class BeachImplementations implements BeachRepository {
         	utcOffset = Integer.parseInt(utc);
         	utcOffset = -utcOffset;
         } else {
-        	utcOffset = Integer.parseInt(utc);
+        	utcOffset = Integer.parseInt(utc.substring(0, 1));
         }
         
         long utcFinal = ConverterInfoBeach.getUtcBeach(utcOffset);
