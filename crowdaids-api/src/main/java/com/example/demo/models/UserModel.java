@@ -1,36 +1,49 @@
 package com.example.demo.models;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-
-import com.example.demo.repositories.FavoritesImplementations;
-
-import javax.persistence.*;
-
 import java.util.List;
 import java.util.UUID;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "user")
 public class UserModel {
 
-    @Id
+	@Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
+            strategy = "org.hibernate.id.UUIDGenerator")
+	@Type(type = "uuid-char")
     @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
-    @Type(type = "uuid-char")
     private UUID id;
-
+	
+	@Column(name = "fullname")
     private String fullname;
+	
+	@Column(name = "username")
     private String username;
+	
+	@Column(name = "email")
     private String email;
+	
+	@Column(name = "password")
     private String password;
+	
+	@Column(name = "old_password")
     private String oldPassword;
-    
-    @OneToMany(targetEntity = FavoritesBeachesModel.class, cascade = CascadeType.MERGE)
+
+	@OneToMany(targetEntity = FavoritesBeachesModel.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private List <FavoritesBeachesModel> favorites;
 
@@ -44,7 +57,7 @@ public class UserModel {
 
 	public UUID getId() { return id; }
 
-    public void setId(UUID id)  { this.id = id; }
+    //public void setId(UUID id)  { this.id = id; }
 
     public String getFullname() {
         return fullname;

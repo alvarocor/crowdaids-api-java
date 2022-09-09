@@ -42,16 +42,18 @@ public class FavoritesController {
 	@RequestMapping(value = "/api/users/favorites", method = RequestMethod.GET)
 	public List getFavBeaches(@RequestHeader(value = "Authorization") String token) {
 		Validators.validateToken(token);
-
-        String bearerToken = token;
-        String[] parts = bearerToken.split(" ");
-        String finalToken = parts[1];
-
-        String userId = validateToken(finalToken);
-        
-        List favorites = favoritesImplementations.getFavBeaches(userId);
+ 
+        List favorites = favoritesImplementations.getFavBeaches();
         
         return favorites;
+	}
+	
+	@RequestMapping(value = "/api/users/mostFavorites", method = RequestMethod.GET)
+	public List getMostFavBeaches() {
+		
+		List mostFavs = favoritesImplementations.getMostFavBeaches();
+		
+		return mostFavs;
 	}
 	
 	 public String validateToken(String token) {

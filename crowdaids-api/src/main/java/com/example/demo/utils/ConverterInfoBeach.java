@@ -107,19 +107,41 @@ public class ConverterInfoBeach {
 		
 		for (int i = 0; i < info.size(); i++) {
 			if (info.get(i).toString().substring(11, 21) == timeToCheck) {
-				directionSwell = info.get(i).toString().substring(indexDirection + 10, indexDirection + 18);
-				response.add(directionSwell);
-				directionSwellMin = info.get(i).toString().substring(indexDirectionMin + 13, indexDirectionMin + 21);
-				response.add(directionSwellMin);
+				if (info.get(i).toString().substring(indexDirection + 10, indexDirection + 12).equals("0,")) {
+					directionSwell = info.get(i).toString().substring(indexDirection + 10, indexDirection + 11);
+					response.add(directionSwell);
+				} else {
+					directionSwell = info.get(i).toString().substring(indexDirection + 10, indexDirection + 17);
+					response.add(directionSwell);
+				}
+				
+				if (info.get(i).toString().substring(indexDirectionMin + 13, indexDirectionMin + 15).equals("0,")) {
+					directionSwellMin = info.get(i).toString().substring(indexDirectionMin + 13, indexDirectionMin + 14);
+					response.add(directionSwellMin);
+				} else {
+					directionSwellMin = info.get(i).toString().substring(indexDirectionMin + 13, indexDirectionMin + 20);
+					response.add(directionSwellMin);
+				}
 				
 				return response;
 			}
 		}
 		
-		directionSwell = info.get(0).toString().substring(indexDirection + 10, indexDirection + 18);
-		response.add(directionSwell);
-		directionSwellMin = info.get(0).toString().substring(indexDirectionMin + 13, indexDirectionMin + 21);
-		response.add(directionSwellMin);
+		if (info.get(0).toString().substring(indexDirection + 10, indexDirection + 12).equals("0,")) {
+			directionSwell = info.get(0).toString().substring(indexDirection + 10, indexDirection + 11);
+			response.add(directionSwell);
+		} else {
+			directionSwell = info.get(0).toString().substring(indexDirection + 10, indexDirection + 16);
+			response.add(directionSwell);
+		}
+		
+		if (info.get(0).toString().substring(indexDirectionMin + 13, indexDirectionMin + 15).equals("0,")) {
+			directionSwellMin = info.get(0).toString().substring(indexDirectionMin + 13, indexDirectionMin + 14);
+			response.add(directionSwellMin);
+		} else {
+			directionSwellMin = info.get(0).toString().substring(indexDirectionMin + 13, indexDirectionMin + 19);
+			response.add(directionSwellMin);
+		}
 		return response;
 	}
 	
@@ -159,8 +181,15 @@ public class ConverterInfoBeach {
 	    
 	    for (int i = 0; i < info.size(); i++) {
 			if (info.get(i).toString().substring(11, 21) == timeToCheck) {
-				weather = info.get(i).toString().substring(indexTemp + 12, indexTemp + 17);
-				response.add(weather);
+				
+				if (info.get(i).toString().substring(indexTemp + 12, indexTemp + 14).equals("0,")) {
+					weather = info.get(i).toString().substring(indexTemp + 12, indexTemp + 13);
+					response.add(weather);
+				} else {
+					weather = info.get(i).toString().substring(indexTemp + 12, indexTemp + 17);
+					response.add(weather);
+				}
+				
 				differentIcon = info.get(i).toString().substring(indexCond + 10, info.get(i).toString().length() - 1);
 				response.add(differentIcon);
 				
@@ -168,8 +197,14 @@ public class ConverterInfoBeach {
 			}
 	    }
 	    
-	    weather = info.get(0).toString().substring(indexTemp + 12, indexTemp + 17);
-		response.add(weather);
+	    if (info.get(0).toString().substring(indexTemp + 12, indexTemp + 14).equals("0,")) {
+	    	weather = info.get(0).toString().substring(indexTemp + 12, indexTemp + 13);
+			response.add(weather);
+	    } else {
+	    	weather = info.get(0).toString().substring(indexTemp + 12, indexTemp + 17);
+			response.add(weather);
+	    }
+	    
 		differentIcon = info.get(0).toString().substring(indexCond + 10, info.get(0).toString().length() - 1);
 		response.add(differentIcon);
 		
@@ -206,10 +241,18 @@ public class ConverterInfoBeach {
 		
 		for (int i = 0; i < info.size(); i++) {
 			if (info.get(i).toString().substring(11, 21) == timeToCheck) {
-				wind =  info.get(i).toString().substring(indexSpeed + 6, indexSpeed + 11);
-				response.add(wind);
+				
+				if (info.get(i).toString().substring(indexSpeed + 6, indexSpeed + 8).equals("0,")) {
+					wind =  info.get(i).toString().substring(indexSpeed + 6, indexSpeed + 7);
+					response.add(wind);
+				} else {
+					wind =  info.get(i).toString().substring(indexSpeed + 6, indexSpeed + 11);
+					response.add(wind);
+				}
+				
 				windText = info.get(i).toString().substring(indexDirectionType + 14, indexGust);
 				response.add(windText);
+				
 				windDirection = info.get(i).toString().substring(indexDirection + 10, indexDirectionType - 2);
 				response.add(windDirection);
 				
@@ -217,10 +260,17 @@ public class ConverterInfoBeach {
 			}
 		}
 		
-		wind =  info.get(0).toString().substring(indexSpeed + 6, indexSpeed + 11);
-		response.add(wind);
+		if (info.get(0).toString().substring(indexSpeed + 6, indexSpeed + 8).equals("0,")) {
+			wind =  info.get(0).toString().substring(indexSpeed + 6, indexSpeed + 7);
+			response.add(wind);
+		} else {
+			wind =  info.get(0).toString().substring(indexSpeed + 6, indexSpeed + 11);
+			response.add(wind);
+		}
+		
 		windText = info.get(0).toString().substring(indexDirectionType + 14, indexGust);
 		response.add(windText);
+		
 		windDirection = info.get(0).toString().substring(indexDirection + 10, indexDirectionType - 2);
 		response.add(windDirection);
 		
